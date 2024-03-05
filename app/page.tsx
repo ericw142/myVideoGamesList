@@ -1,5 +1,6 @@
 "use client"
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Key } from 'react'
+import GameTile from './components/GameTile'
 
 export default function Home() {
     const [data, setData] = useState(null)
@@ -9,10 +10,14 @@ export default function Home() {
         fetch('/api')
           .then((res) => res.json())
           .then((data) => {
-            setData(data)
+            if (data?.data) {
+                setData(data.data)
+            }
             setLoading(false)
           })
     }, [])
+
+    if (isLoading) return <div></div>;
 
     return (
         <div>
@@ -21,12 +26,13 @@ export default function Home() {
                 <button className="p-2">Signup</button>
             </div>
             <main className="flex min-h-screen flex-col items-center justify-between p-24">
-                {/* login, signup buttons */}
-                
-                {/* username displays on the top if logged in */}
                 My Video Games List
 
-                <button onClick={() => console.log(data)}>Click</button>
+                <div>
+                    {data?.results.map((el: any, i: Key | null | undefined) => (
+                        <GameTile key={i} item={el}/>
+                    ))}
+                </div>
             </main>
         </div>
     );
