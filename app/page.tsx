@@ -1,4 +1,19 @@
+"use client"
+import { useState, useEffect } from 'react'
+
 export default function Home() {
+    const [data, setData] = useState(null)
+    const [isLoading, setLoading] = useState(true)
+
+    useEffect(() => {
+        fetch('/api')
+          .then((res) => res.json())
+          .then((data) => {
+            setData(data)
+            setLoading(false)
+          })
+    }, [])
+
     return (
         <div>
             <div className="flex items-center justify-end p-4 z-[100] w-full absolute">
@@ -10,6 +25,8 @@ export default function Home() {
                 
                 {/* username displays on the top if logged in */}
                 My Video Games List
+
+                <button onClick={() => console.log(data)}>Click</button>
             </main>
         </div>
     );
