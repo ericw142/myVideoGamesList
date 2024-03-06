@@ -5,12 +5,12 @@ import GenreButton from './components/GenreButton'
 import capitalizeFirstLetter from '../utils/capitalizeFirstLetter'
 
 export default function Discover() {
-    const [games, setGames] = useState(null)
+    const [games, setGames] = useState<{ results: [] }>({ results: [] })
     const [selectedGenre, setSelectedGenre] = useState('action')
     const [isLoading, setLoading] = useState(true)
 
     useEffect(() => {
-        setGames(null)
+        setGames({ results: [] })
         fetch(`/api/games?genre=${selectedGenre}`)
           .then((res) => res.json())
           .then((data) => {
@@ -33,7 +33,7 @@ export default function Discover() {
                     <GenreButton genre='indie' setSelectedGenre={setSelectedGenre}/>
                 </div>
                 <div className='text-center'>
-                    <GamesDisplay title={capitalizeFirstLetter(selectedGenre)} games={games?.results}/>
+                    <GamesDisplay title={capitalizeFirstLetter(selectedGenre)} games={games?.results ?? []}/>
                 </div>
             </main>
         </div>
