@@ -6,16 +6,16 @@ export default function Home() {
     const [data, setData] = useState(null)
     const [isLoading, setLoading] = useState(true)
 
-    useEffect(() => {
-        fetch('/api')
-          .then((res) => res.json())
-          .then((data) => {
-            if (data?.data) {
-                setData(data.data)
-            }
-            setLoading(false)
-          })
-    }, [])
+    // useEffect(() => {
+    //     fetch('/api')
+    //       .then((res) => res.json())
+    //       .then((data) => {
+    //         if (data?.data) {
+    //             setData(data.data)
+    //         }
+    //         setLoading(false)
+    //       })
+    // }, [])
 
     if (isLoading) return <div></div>;
 
