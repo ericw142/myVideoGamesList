@@ -1,5 +1,32 @@
+"use client"
+import { useState, useEffect } from 'react'
+import GamesDisplay from '../discover/components/GamesDisplay'
+
 export default function TopGames() {
+    const [games, setGames] = useState<{ results: [] }>({ results: [] })
+    const [isLoading, setLoading] = useState(true)
+
+    useEffect(() => {
+        setGames({ results: [] })
+        fetch(`/api/games/topgames`)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data?.games) {
+                setGames(data.games)
+            }
+            setLoading(false)
+          })
+    }, [])
+
+    if (isLoading) return <div></div>;
+
     return (
-        <div>Top Games</div>
-    )
+        <div>
+            <main className="flex min-h-screen flex-col items-center justify-between p-24">
+                <div className='text-center'>
+                    <GamesDisplay title={'Top Games by Metacritic Rating'} games={games?.results ?? []}/>
+                </div>
+            </main>
+        </div>
+    );
 }

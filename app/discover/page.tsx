@@ -14,7 +14,6 @@ export default function Discover() {
         fetch(`/api/games?genre=${selectedGenre}`)
           .then((res) => res.json())
           .then((data) => {
-            console.log(data)
             if (data?.games) {
                 setGames(data.games)
             }

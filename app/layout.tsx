@@ -21,6 +21,7 @@ export default function RootLayout({
             <div className="flex items-center justify-end p-4 z-[100] w-full absolute">
                 <Link href="/" className='mr-auto text-xl'>My Video Games List</Link>
                 <Link href="/discover" className="p-2">Discover</Link>
+                <Link href="/topgames" className="p-2">Top Games</Link>
                 <Link href="/login" className="p-2">Login</Link>
                 <Link href="/signup" className="p-2">Signup</Link>
             </div>
