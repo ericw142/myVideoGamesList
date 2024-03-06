@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
         <body className={inter.className}>
-            <div className="flex items-center justify-end p-4 z-[100] w-full absolute">
+            <div className="flex items-center justify-end p-4 z-[100] w-full absolute bg-white">
                 <Link href="/" className='mr-auto text-xl'>My Video Games List</Link>
                 <Link href="/discover" className="p-2">Discover</Link>
                 <Link href="/topgames" className="p-2">Top Games</Link>
