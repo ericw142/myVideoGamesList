@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from 'react'
-import GamesDisplay from '../discover/components/GamesDisplay'
+import TopGamesDisplay from './components/TopGamesDisplay'
 
 export default function TopGames() {
     const [games, setGames] = useState<{ results: [] }>({ results: [] })
@@ -24,7 +24,7 @@ export default function TopGames() {
         <div>
             <main className="flex min-h-screen flex-col items-center justify-between p-24">
                 <div className='text-center'>
-                    <GamesDisplay title={'Top Games by Metacritic Rating'} games={games?.results ?? []}/>
+                    <TopGamesDisplay title={'Top Games by Metacritic Rating'} games={games?.results ?? []}/>
                 </div>
             </main>
         </div>
