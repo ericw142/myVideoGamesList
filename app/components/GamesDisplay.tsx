@@ -7,7 +7,7 @@ const GamesDisplay = ({ title, games }) => {
             <h2 className='text-black font-bold md:text-xl p-4'>{title}</h2>
 
             <div>
-                {games.map((item, id) => (
+                {games?.map((item, id) => (
                    <GameTile key={`${item.name}-${id}-tile`} item={item}/>
                 ))}
             </div>
