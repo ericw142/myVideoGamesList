@@ -22,8 +22,7 @@ export default function RootLayout({
                 <Link href="/" className='mr-auto text-xl'>My Video Games List</Link>
                 <Link href="/discover" className="p-2">Discover</Link>
                 <Link href="/topgames" className="p-2">Top Games</Link>
-                <Link href="/login" className="p-2">Login</Link>
-                <Link href="/signup" className="p-2">Signup</Link>
+                <Link href="/" className="p-2">My List</Link>
             </div>
             {children}
             <div className="fixed bottom-0 w-full text-center p-4">
