@@ -1,21 +1,21 @@
 "use client"
 import { useState, useEffect, Key } from 'react'
-import GameTile from './components/GameTile'
+import GamesDisplay from './components/GamesDisplay'
 
 export default function Home() {
     const [data, setData] = useState(null)
     const [isLoading, setLoading] = useState(true)
 
-    // useEffect(() => {
-    //     fetch('/api')
-    //       .then((res) => res.json())
-    //       .then((data) => {
-    //         if (data?.data) {
-    //             setData(data.data)
-    //         }
-    //         setLoading(false)
-    //       })
-    // }, [])
+    useEffect(() => {
+        fetch('/api')
+          .then((res) => res.json())
+          .then((data) => {
+            if (data?.data) {
+                setData(data.data)
+            }
+            setLoading(false)
+          })
+    }, [])
 
     if (isLoading) return <div></div>;
 
@@ -29,9 +29,7 @@ export default function Home() {
                 My Video Games List
 
                 <div>
-                    {data?.results.map((el: any, i: Key | null | undefined) => (
-                        <GameTile key={i} item={el}/>
-                    ))}
+                    <GamesDisplay title="Indie" games={data?.results}/>
                 </div>
             </main>
         </div>
