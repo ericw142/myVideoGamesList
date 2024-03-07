@@ -5,6 +5,7 @@ import GenreButton from './components/GenreButton'
 import capitalizeFirstLetter from '../utils/capitalizeFirstLetter'
 import Image from 'next/image'
 import DetailedView from './components/DetailedView'
+import Pagination from './components/Pagination'
 
 export default function Discover() {
     const [games, setGames] = useState<{ results: [] }>({ results: [] })
@@ -33,7 +34,7 @@ export default function Discover() {
           .then((data) => {
             if (data?.games) {
                 setGames(data.games)
-                setTotalPages(Math.ceil(data.games.count / 20))
+                setTotalPages(Math.ceil((data.games.count / 20)))
             }
             setLoading(false)
           })
@@ -51,18 +52,6 @@ export default function Discover() {
 
         }
     }, [selectedGameSlug])
-
-    const goToPreviousPage = () => {
-        if (page === 1) return;
-        const prev = page - 1;
-        setPage(prev);
-    }
-
-    const goToNextPage = () => {
-        if (page === totalPages) return;
-        const next = page + 1;
-        setPage(next);
-    }
 
     return (
         <div>
@@ -83,9 +72,7 @@ export default function Discover() {
                         <div className='text-center'>
                             <GamesDisplay title={capitalizeFirstLetter(selectedGenre)} games={games?.results ?? []} setSelectedGameSlug={setSelectedGameSlug}/>
                         </div>
-                        <div className='p-4'>
-                            <p className='font-bold'><button onClick={goToPreviousPage}><span>&#60;&#60;</span></button> {page} of {totalPages} <button onClick={goToNextPage}><span>&#62;&#62;</span></button></p>
-                        </div>
+                        <Pagination page={page} totalPages={totalPages} setPage={setPage} />
                     </div>
                 )}
             </main>

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import TopGamesDisplay from './components/TopGamesDisplay'
 import Image from 'next/image'
 import DetailedView from '../discover/components/DetailedView'
+import Pagination from '../discover/components/Pagination'
 
 export default function TopGames() {
     const [games, setGames] = useState<{ results: [] }>({ results: [] })
@@ -19,7 +20,7 @@ export default function TopGames() {
           .then((data) => {
             if (data?.games) {
                 setGames(data.games)
-                setTotalPages(Math.ceil(data.games.count / 20))
+                setTotalPages(Math.ceil((data.games.count / 20)))
             }
             setLoading(false)
           })
@@ -38,18 +39,6 @@ export default function TopGames() {
         }
     }, [selectedGameSlug])
 
-    const goToPreviousPage = () => {
-        if (page === 1) return;
-        const prev = page - 1;
-        setPage(prev);
-    }
-
-    const goToNextPage = () => {
-        if (page === totalPages) return;
-        const next = page + 1;
-        setPage(next);
-    }
-
     return (
         <div className=''>
            <Image className='hidden sm:block absolute w-full h-full object-cover' fill={true} src="/george-kedenburg-iii-v4UVbVgsW-4-unsplash.jpg" alt="movie_background"/>
@@ -61,9 +50,7 @@ export default function TopGames() {
                 ) : (
                     <div className='text-center w-full h-[850px] mx-auto bg-white/90 z-50 overflow-scroll overscroll-contain rounded'>
                         <TopGamesDisplay title={'Top Games by Metacritic Rating'} games={games?.results ?? []} setSelectedGameSlug={setSelectedGameSlug}/>
-                        <div className='p-4'>
-                            <p className='font-bold'><button onClick={goToPreviousPage}><span>&#60;&#60;</span></button> {page} of {totalPages} <button onClick={goToNextPage}><span>&#62;&#62;</span></button></p>
-                        </div>
+                        <Pagination page={page} totalPages={totalPages} setPage={setPage} />
                     </div>  
                 )}
             </main>
