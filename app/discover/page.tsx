@@ -8,14 +8,13 @@ import DetailedView from './components/DetailedView'
 import Pagination from './components/Pagination'
 
 export default function Discover() {
-    const [games, setGames] = useState<{ results: [] }>({ results: [] })
+    const [games, setGames] = useState<[]>([])
     const [genres, setGenres] = useState<[{}]>([{}])
     const [selectedGenre, setSelectedGenre] = useState('action')
     const [selectedGameSlug, setSelectedGameSlug] = useState<string>('')
     const [gameDetails, setGameDetails] = useState<any>(undefined)
     const [isLoading, setLoading] = useState(true)
     const [page, setPage] = useState<number>(1)
-    const [totalPages, setTotalPages] = useState<number>(1)
 
     useEffect(() => {
         fetch('/api/genres')
@@ -32,13 +31,16 @@ export default function Discover() {
     }, [selectedGenre])
 
     useEffect(() => {
-        setGames({ results: [] })
+        setGames([])
         fetch(`/api/games?genre=${selectedGenre}&page=${page}`)
           .then((res) => res.json())
           .then((data) => {
-            if (data?.games && data?.games?.count !== undefined && data?.games?.results !== undefined) {
-                setGames(data.games)
-                setTotalPages(Math.ceil((data.games.count / data.games.results.length)))
+            if (data?.games?.results !== undefined) {
+                const blockedTags = ['nudity', 'sexual-content', 'hentai'];
+                const filtered =  data.games.results.filter((result: any) =>
+                    !result.tags.some((tag: any) => blockedTags.includes(tag.slug))
+                );
+                setGames(filtered)
             }
             setLoading(false)
           })
@@ -74,9 +76,9 @@ export default function Discover() {
                             ))}
                         </div>
                         <div className='text-center'>
-                            <GamesDisplay title={capitalizeFirstLetter(selectedGenre)} games={games?.results ?? []} setSelectedGameSlug={setSelectedGameSlug}/>
+                            <GamesDisplay title={capitalizeFirstLetter(selectedGenre)} games={games ?? []} setSelectedGameSlug={setSelectedGameSlug}/>
                         </div>
-                        <Pagination page={page} totalPages={totalPages} setPage={setPage} />
+                        <Pagination page={page} totalPages={100} setPage={setPage} />
                     </div>
                 )}
             </main>

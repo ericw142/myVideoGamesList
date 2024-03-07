@@ -3,58 +3,58 @@ import React, { useEffect, useState, Dispatch, SetStateAction } from 'react'
 
 export interface Props {
     details: {
-        id: number;
-        slug: string;
-        name: string;
-        name_original: string;
-        description: string;
-        metacritic: number;
-        metacritic_platforms: [
+        id?: number;
+        slug?: string;
+        name?: string;
+        name_original?: string;
+        description?: string;
+        metacritic?: number;
+        metacritic_platforms?: [
             {
                 metascore: number;
                 url: string;
             }
         ];
-        released: string; //YYYY-MM-DD
-        tba: boolean;
-        updated: string; //2024-03-07T15:07:57Z
-        background_image: string;
-        background_image_additional: string;
-        website: string;
-        rating: number;
-        rating_top: number;
-        ratings: {};
-        reactions: {};
-        added: number;
-        added_by_status: {};
-        playtime: number;
-        screenshots_count: number;
-        movies_count: number;
-        creators_count: number;
-        achievements_count: number;
-        parent_achievements_count: string;
-        reddit_url: string;
-        reddit_name: string;
-        reddit_description: string;
-        reddit_logo: string;
-        reddit_count: number;
-        twitch_count: string;
-        youtube_count: string;
+        released?: string; //YYYY-MM-DD
+        tba?: boolean;
+        updated?: string; //2024-03-07T15:07:57Z
+        background_image?: string;
+        background_image_additional?: string;
+        website?: string;
+        rating?: number;
+        rating_top?: number;
+        ratings?: {};
+        reactions?: {};
+        added?: number;
+        added_by_status?: {};
+        playtime?: number;
+        screenshots_count?: number;
+        movies_count?: number;
+        creators_count?: number;
+        achievements_count?: number;
+        parent_achievements_count?: string;
+        reddit_url?: string;
+        reddit_name?: string;
+        reddit_description?: string;
+        reddit_logo?: string;
+        reddit_count?: number;
+        twitch_count?: string;
+        youtube_count?: string;
         reviews_text_count: string;
-        ratings_count: number;
-        suggestions_count: number;
-        alternative_names: string;
-        metacritic_url: string;
-        parents_count: number;
-        additions_count: number;
-        game_series_count: number;
-        esrb_rating: {
+        ratings_count?: number;
+        suggestions_count?: number;
+        alternative_names?: string;
+        metacritic_url?: string;
+        parents_count?: number;
+        additions_count?: number;
+        game_series_count?: number;
+        esrb_rating?: {
             id: number;
             slug: string;
             name: string;
         };
-        description_raw: string;
-        platforms: [
+        description_raw?: string;
+        platforms?: [
             {
                 platform: {
                     id: number;
@@ -90,9 +90,9 @@ const DetailedView = (props: Props) => {
         }
     }, [props.slug])
 
-    const formatReleaseDate = (released: string) => {
+    const formatReleaseDate = (released: string | undefined) => {
         if (!released) return '';
-        return `${released.slice(5,7)}/${released.slice(8,10)}/${released.slice(0,4)}`;
+        return `Released: ${released.slice(5,7)}/${released.slice(8,10)}/${released.slice(0,4)}`;
     }
 
     return (
@@ -122,16 +122,16 @@ const DetailedView = (props: Props) => {
                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
                         <div>
                             <div className='pt-2 pb-6'>
-                                <p>Released: {formatReleaseDate(props.details.released)}</p>
+                                <p>{formatReleaseDate(props.details.released)}</p>
                                 <a className='text-blue-700' href={props.details.website} target='_blank'>{props.details.name} Website</a>
                                 <br />
                                 <p>Metacritic Score: {props.details.metacritic} - <a className='text-blue-700' href={props.details.metacritic_url} target='_blank'>Reviews</a></p>
-                                <p>ESRB: {props.details.esrb_rating.name}</p>
+                                <p>{props.details.esrb_rating?.name ? `ESRB: ${props.details.esrb_rating.name}` : ''}</p>
                             </div>
                             <div>
                                 <p className='font-bold text-xl'>Platforms: </p>
                                 <ul>
-                                    {props.details.platforms.map((el: any, i: number) => (
+                                    {props.details.platforms?.map((el: any, i: number) => (
                                         <li key={`platform-li-${i}`}>{el.platform.name}</li>
                                     ))}
                                 </ul>
@@ -139,7 +139,7 @@ const DetailedView = (props: Props) => {
                             
                         </div>
                         <div>
-                            {achievements?.results && (
+                            {achievements?.results?.length > 0 && (
                                 <div>
                                     <p className='font-bold text-xl'>Achievements</p>
                                     <div className='h-[600px] overflow-scroll'>

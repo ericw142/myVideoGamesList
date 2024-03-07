@@ -6,21 +6,23 @@ import DetailedView from '../discover/components/DetailedView'
 import Pagination from '../discover/components/Pagination'
 
 export default function TopGames() {
-    const [games, setGames] = useState<{ results: [] }>({ results: [] })
+    const [games, setGames] = useState<[]>([])
     const [selectedGameSlug, setSelectedGameSlug] = useState<string>('')
     const [gameDetails, setGameDetails] = useState<any>(undefined)
     const [isLoading, setLoading] = useState(true)
     const [page, setPage] = useState<number>(1)
-    const [totalPages, setTotalPages] = useState<number>(1)
 
     useEffect(() => {
-        setGames({ results: [] })
+        setGames([])
         fetch(`/api/games/topgames?page=${page}`)
           .then((res) => res.json())
           .then((data) => {
-            if (data?.games && data?.games?.count !== undefined && data?.games?.results !== undefined) {
-                setGames(data.games)
-                setTotalPages(Math.ceil((data.games.count / data.games.results.length)))
+            if (data?.games?.results !== undefined) {
+                const blockedTags = ['nudity', 'sexual-content', 'hentai'];
+                const filtered =  data.games.results.filter((result: any) =>
+                    !result.tags.some((tag: any) => blockedTags.includes(tag.slug))
+                );
+                setGames(filtered)
             }
             setLoading(false)
           })
@@ -49,8 +51,8 @@ export default function TopGames() {
                     <DetailedView details={gameDetails} setGameDetails={setGameDetails} slug={selectedGameSlug} setSlug={setSelectedGameSlug}/>
                 ) : (
                     <div className='text-center w-full h-[850px] mx-auto bg-white/90 z-50 overflow-scroll overscroll-contain rounded'>
-                        <TopGamesDisplay title={'Top Games by Metacritic Rating'} games={games?.results ?? []} setSelectedGameSlug={setSelectedGameSlug}/>
-                        <Pagination page={page} totalPages={totalPages} setPage={setPage} />
+                        <TopGamesDisplay title={'Top Games by Metacritic Rating'} games={games ?? []} setSelectedGameSlug={setSelectedGameSlug}/>
+                        <Pagination page={page} totalPages={1000} setPage={setPage} />
                     </div>  
                 )}
             </main>
