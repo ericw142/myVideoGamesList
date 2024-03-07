@@ -7,13 +7,14 @@ import Completed from './list-components/Completed';
 import OnHold from './list-components/OnHold';
 import Dropped from './list-components/Dropped';
 import PlanToPlay from './list-components/PlanToPlay';
+import Image from 'next/image';
 
 export default function Home() {
     const [selectedList, setSelectedList] = useState('All Games')
 
     return (
         <div>
-            <img className='hidden sm:block absolute w-full h-full object-cover' src="/george-kedenburg-iii-v4UVbVgsW-4-unsplash.jpg" alt="movie_background"/>
+            <Image className='hidden sm:block absolute w-full h-full object-cover' fill={true} src="/george-kedenburg-iii-v4UVbVgsW-4-unsplash.jpg" alt="movie_background"/>
 
             <main className="fixed w-full px-4 py-24 z-50">
                 <div className='w-[600px] h-[800px] mx-auto bg-white/90 text-black z-[2]'>

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import GamesDisplay from './components/GamesDisplay'
 import GenreButton from './components/GenreButton'
 import capitalizeFirstLetter from '../utils/capitalizeFirstLetter'
+import Image from 'next/image'
 
 export default function Discover() {
     const [games, setGames] = useState<{ results: [] }>({ results: [] })
@@ -32,23 +33,23 @@ export default function Discover() {
           })
     }, [selectedGenre])
 
-    if (isLoading) return <div></div>;
-
     return (
         <div>
-            <img className='hidden sm:block absolute w-full h-full object-cover' src="/george-kedenburg-iii-v4UVbVgsW-4-unsplash.jpg" alt="movie_background"/>
+            <Image className='hidden sm:block absolute w-full h-full object-cover' fill={true} src="/george-kedenburg-iii-v4UVbVgsW-4-unsplash.jpg" alt="movie_background"/>
             <main className="flex min-h-screen flex-col items-center justify-between px-24 pt-24">
-                <div className='text-center w-full h-[800px] mx-auto bg-white/90 z-50 overflow-scroll overscroll-contain rounded'>
-                    <h5>Select a genre</h5>
-                    <div className='row'>
-                        {genres.map((el, i) => (
-                            <GenreButton key={`genreButton-${i}`} name={el.name} slug={el.slug} setSelectedGenre={setSelectedGenre}/>
-                        ))}
+                {!isLoading && (
+                    <div className='text-center w-full h-[800px] mx-auto bg-white/90 z-50 overflow-scroll overscroll-contain rounded'>
+                        <h5>Select a genre</h5>
+                        <div className='row'>
+                            {genres.map((el, i) => (
+                                <GenreButton key={`genreButton-${i}`} name={el.name} slug={el.slug} setSelectedGenre={setSelectedGenre}/>
+                            ))}
+                        </div>
+                        <div className='text-center'>
+                            <GamesDisplay title={capitalizeFirstLetter(selectedGenre)} games={games?.results ?? []}/>
+                        </div>
                     </div>
-                    <div className='text-center'>
-                        <GamesDisplay title={capitalizeFirstLetter(selectedGenre)} games={games?.results ?? []}/>
-                    </div>
-                </div>
+                )}
             </main>
         </div>
     );
