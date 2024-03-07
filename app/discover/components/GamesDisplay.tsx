@@ -4,7 +4,7 @@ import GameTile from './GameTile'
 export interface Props {
     title: string;
     games: Array<any>;
-    setSelectedGame: Dispatch<SetStateAction<string>>;
+    setSelectedGameSlug: Dispatch<SetStateAction<string>>;
 }
 
 const GamesDisplay = (props: Props) => {
@@ -14,7 +14,7 @@ const GamesDisplay = (props: Props) => {
 
             <div>
                 {props.games?.map((item, id) => (
-                   <GameTile key={`${item.name}-${id}-tile`} item={item} setSelectedGame={props.setSelectedGame}/>
+                   <GameTile key={`${item.name}-${id}-tile`} item={item} setSelectedGameSlug={props.setSelectedGameSlug}/>
                 ))}
             </div>
         </div>

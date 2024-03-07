@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import TopGamesTile from './TopGamesTile';
 
 export interface Props {
     title: string;
     games: Array<any>;
+    setSelectedGameSlug: Dispatch<SetStateAction<string>>;
 }
 
 const TopGamesDisplay = (props: Props) => {
@@ -13,7 +14,7 @@ const TopGamesDisplay = (props: Props) => {
 
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
                 {props.games?.map((item, id) => (
-                   <TopGamesTile key={`${item.name}-${id}-tile`} item={item}/>
+                   <TopGamesTile key={`${item.name}-${id}-tile`} item={item} setSelectedGameSlug={props.setSelectedGameSlug}/>
                 ))}
             </div>
         </div>
