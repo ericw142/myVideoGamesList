@@ -56,7 +56,7 @@ export default function Discover() {
                 {isLoading ? (
                     <></>
                 ) : gameDetails ? (
-                    <DetailedView details={gameDetails} setGameDetails={setGameDetails} slug={selectedGameSlug}/>
+                    <DetailedView details={gameDetails} setGameDetails={setGameDetails} slug={selectedGameSlug} setSlug={setSelectedGameSlug}/>
                 ) : (
                     <div className='text-center w-full h-[800px] mx-auto bg-white/90 z-50 overflow-scroll overscroll-contain rounded'>
                         <h5>Select a genre</h5>

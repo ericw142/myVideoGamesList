@@ -19,16 +19,14 @@ export default function RootLayout({
     <html lang="en">
         <body className={inter.className}>
             <div className="flex items-center justify-end p-4 z-[100] w-full absolute bg-white">
-                <Link href="/" className='mr-auto text-xl'>My Video Games List</Link>
+                <Link href="/" className='text-xl'>My Video Games List -</Link>
+                <Link className="text-blue-700 text-[12px] mr-auto ml-2" href="https://rawg.io/apidocs" target="_blank">Built with RAWG API</Link>
                 <Link href="/discover" className="p-2">Discover</Link>
                 <Link href="/topgames" className="p-2">Top Games</Link>
                 <Link href="/comingsoon" className="p-2">Coming Soon</Link>
                 <Link href="/" className="p-2">My List</Link>
             </div>
             {children}
-            <div className="fixed bottom-0 w-full text-center p-4">
-                <Link className="text-blue-700 text-[18px]" href="https://rawg.io/apidocs" target="_blank">Built with RAWG API</Link>
-            </div>
         </body>
     </html>
   );
