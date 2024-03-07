@@ -7,7 +7,14 @@ export interface Props {
 }
 
 const GenreButton = (props: Props) => {
-    return <button onClick={() => props.setSelectedGenre(props.slug)} className='bg-blue-600 px-6 py-2 rounded cursor-pointer text-white'>{props.name}</button>
+    return (
+        <button
+            onClick={() => props.setSelectedGenre(props.slug)}
+            className='px-6 rounded cursor-pointer text-black hover:bg-black hover:text-white'
+        >
+            {props.name}
+        </button>
+    )
 }
 
 export default GenreButton

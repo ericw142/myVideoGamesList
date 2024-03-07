@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState, Dispatch, SetStateAction } from 'react'
 
 export interface Props {
@@ -74,6 +75,7 @@ export interface Props {
 
 const DetailedView = (props: Props) => {
     const [achievements, setAchievements] = useState<any>()
+
     useEffect(() => {
         if (props.slug) {
             fetch(`/api/games/details/achievements?slug=${props.slug}`)
@@ -85,7 +87,12 @@ const DetailedView = (props: Props) => {
             })
     
         }
-    }, [])
+    }, [props.slug])
+
+    const formatReleaseDate = (released: string) => {
+        if (!released) return '';
+        return `${released.slice(5,7)}/${released.slice(8,10)}/${released.slice(0,4)}`;
+    }
 
     return (
         <div className='w-full h-[800px] mx-auto bg-white/90 z-50 overflow-scroll overscroll-contain rounded'>
@@ -95,31 +102,54 @@ const DetailedView = (props: Props) => {
                     <img src={props.details.background_image_additional} alt={props.details.name} width="auto" height="auto"/>
                 </div>
 
-                <div className='pt-4'>
-                    <h5 className='font-bold text-3xl'>{props.details.name}</h5>
+                <div className='pt-4 pr-4'>
+                    <div className='flex justify-between'>
+                        <h5 className='font-bold text-3xl'>{props.details.name}</h5>
+                        <button
+                            onClick={() => props.setGameDetails(undefined)}
+                            className='border-solid border-2 border-gray-500 px-6 rounded cursor-pointer text-gray-500 hover:bg-gray-500 hover:text-white'
+                        >
+                            Back
+                        </button>
+                    </div>
                     <p>{props.details.description_raw}</p>
-                    <button className='bg-blue-600 px-6 py-2 rounded cursor-pointer text-white' onClick={() => props.setGameDetails(undefined)}>Back</button>
+                    
                     
                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
                         <div>
-                            <p className='font-bold text-xl'>Platforms: </p>
-                            <ul>
-                                {props.details.platforms.map((el: any, i: number) => (
-                                    <li key={`platform-li-${i}`}>{el.platform.name}</li>
-                                ))}
-                            </ul>
+                            <div className='pt-2 pb-6'>
+                                <p>Released: {formatReleaseDate(props.details.released)}</p>
+                                <a className='text-blue-700' href={props.details.website} target='_blank'>{props.details.name} Website</a>
+                                <br />
+                                <p>Metacritic Score: {props.details.metacritic} - <a className='text-blue-700' href={props.details.metacritic_url} target='_blank'>Reviews</a></p>
+                                <p>ESRB: {props.details.esrb_rating.name}</p>
+                            </div>
+                            <div>
+                                <p className='font-bold text-xl'>Platforms: </p>
+                                <ul>
+                                    {props.details.platforms.map((el: any, i: number) => (
+                                        <li key={`platform-li-${i}`}>{el.platform.name}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            
                         </div>
                         <div>
                             {achievements?.results && (
                                 <div>
                                     <p className='font-bold text-xl'>Achievements</p>
-                                    <p>Count: {achievements.count}</p>
                                     <div className='h-[600px] overflow-scroll'>
                                         <ul>
                                             {achievements.results.map((el: any, i: number) => (
                                                 <li key={`achievement-li-${i}`}>
-                                                    <img width="100px" height="auto" src={el.image} alt={el.name}/>
-                                                    {el.name} : {el.description}
+                                                    <div className='grid grid-cols-3 gap-2'>
+                                                        <div className='col-span-1'>
+                                                            <img width="100px" height="auto" src={el.image} alt={el.name}/>
+                                                        </div>
+                                                        <div className='col-span-2 text-left'>
+                                                            <p>{el.name} : {el.description}</p>
+                                                        </div>
+                                                    </div>
                                                 </li>
                                             ))}
                                         </ul>
