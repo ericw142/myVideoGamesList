@@ -28,13 +28,17 @@ export default function Discover() {
     }, [])
 
     useEffect(() => {
+        setPage(1)
+    }, [selectedGenre])
+
+    useEffect(() => {
         setGames({ results: [] })
         fetch(`/api/games?genre=${selectedGenre}&page=${page}`)
           .then((res) => res.json())
           .then((data) => {
-            if (data?.games) {
+            if (data?.games && data?.games?.count !== undefined && data?.games?.results !== undefined) {
                 setGames(data.games)
-                setTotalPages(Math.ceil((data.games.count / 20)))
+                setTotalPages(Math.ceil((data.games.count / data.games.results.length)))
             }
             setLoading(false)
           })

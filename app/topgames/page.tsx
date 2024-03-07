@@ -18,9 +18,9 @@ export default function TopGames() {
         fetch(`/api/games/topgames?page=${page}`)
           .then((res) => res.json())
           .then((data) => {
-            if (data?.games) {
+            if (data?.games && data?.games?.count !== undefined && data?.games?.results !== undefined) {
                 setGames(data.games)
-                setTotalPages(Math.ceil((data.games.count / 20)))
+                setTotalPages(Math.ceil((data.games.count / data.games.results.length)))
             }
             setLoading(false)
           })
