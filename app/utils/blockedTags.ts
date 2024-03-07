@@ -1,0 +1,1 @@
+export default ['nudity', 'sexual-content', 'hentai'];

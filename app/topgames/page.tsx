@@ -4,6 +4,7 @@ import TopGamesDisplay from './components/TopGamesDisplay'
 import Image from 'next/image'
 import DetailedView from '../discover/components/DetailedView'
 import Pagination from '../discover/components/Pagination'
+import blockedTags from '../utils/blockedTags'
 
 export default function TopGames() {
     const [games, setGames] = useState<[]>([])
@@ -18,7 +19,6 @@ export default function TopGames() {
           .then((res) => res.json())
           .then((data) => {
             if (data?.games?.results !== undefined) {
-                const blockedTags = ['nudity', 'sexual-content', 'hentai'];
                 const filtered =  data.games.results.filter((result: any) =>
                     !result.tags.some((tag: any) => blockedTags.includes(tag.slug))
                 );

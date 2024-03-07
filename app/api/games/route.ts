@@ -5,9 +5,10 @@ const gamesRequest = `https://api.rawg.io/api/games?&key=${process.env.RAWG_API_
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
-    const genre = searchParams.get('genre')
     const page = searchParams.get('page')
-    const res = await fetch(`${gamesRequest}${genre ? `&genres=${genre}` : ''}${page ? `&page=${page}&page_size=20` : ''}`)
+    const genre = searchParams.get('genre')
+    const platform = searchParams.get('platform')
+    const res = await fetch(`${gamesRequest}${genre && `&genres=${genre}`}${platform ? `&platforms=${platform}` : ''}${page !== undefined && `&page=${page}&page_size=20`}`)
 
     const games = await res.json()
    
