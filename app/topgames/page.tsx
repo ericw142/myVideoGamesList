@@ -23,6 +23,7 @@ export default function TopGames() {
                     !result.tags.some((tag: any) => blockedTags.includes(tag.slug))
                 );
                 setGames(filtered)
+                console.log(filtered)
             }
             setLoading(false)
           })

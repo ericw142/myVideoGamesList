@@ -1,5 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
+import truncateString from '@/app/utils/truncateString';
 import React, { useEffect, useState, Dispatch, SetStateAction } from 'react'
+import { useCookies } from 'next-client-cookies'
+import addGameToList from '@/app/utils/addGametoList';
 
 export interface Props {
     details: {
@@ -75,7 +78,9 @@ export interface Props {
 }
 
 const DetailedView = (props: Props) => {
+    const cookies = useCookies()
     const [achievements, setAchievements] = useState<any>()
+    const [selectedList, setSelectedList] = useState<string>('currentlyPlaying')
 
     useEffect(() => {
         if (props.slug) {
@@ -96,7 +101,7 @@ const DetailedView = (props: Props) => {
     }
 
     return (
-        <div className='w-full h-[846px] mx-auto bg-white/90 z-50 rounded'>
+        <div className='w-full h-[846px] mx-auto bg-white z-50 rounded'>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
                 <div>
                     <img className='max-h-[424px] w-full' src={props.details.background_image} alt={props.details.name} width="auto" height="424px"/>
@@ -111,16 +116,35 @@ const DetailedView = (props: Props) => {
                                 props.setSlug('')
                                 props.setGameDetails(undefined)
                             }}
-                            className='border-solid border-2 border-gray-500 px-6 rounded cursor-pointer text-gray-500 hover:bg-gray-500 hover:text-white'
+                            className='border-solid border-2 border-black px-6 rounded cursor-pointer hover:bg-black hover:text-white'
                         >
                             Back
                         </button>
                     </div>
-                    <p>{props.details.description_raw}</p>
+                    <p>{truncateString(props.details.description_raw, 1000)}</p>
                     
                     
-                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mt-3'>
                         <div>
+                            <div>
+                                <h6 className='font-bold text-xl'>Select a list to add this game to</h6>
+                                <select onChange={(e) => setSelectedList(e.currentTarget.value)} className='bg-white rounded w-full h-full p-2 border-2 border-black'>
+                                    <option value="currentlyPlaying">Currently Playing</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="onHold">On Hold</option>
+                                    <option value="dropped">Dropped</option>
+                                    <option value="planToPlay">Plan to Play</option>
+                                </select>
+                                <button
+                                    onClick={() => {
+                                        const updatedList = addGameToList(cookies.get(selectedList), { id: props.details.id, name: props.details.name, background_image: props.details.background_image })
+                                        cookies.set(selectedList, updatedList)
+                                    }}
+                                    className='mt-3 border-solid border-2 border-black px-6 rounded cursor-pointer hover:bg-black hover:text-white'
+                                >
+                                    Add to List
+                                </button>
+                            </div>
                             <div className='pt-2 pb-6'>
                                 <p>{formatReleaseDate(props.details.released)}</p>
                                 <a className='text-blue-700' href={props.details.website} target='_blank'>{props.details.name} Website</a>
@@ -129,7 +153,7 @@ const DetailedView = (props: Props) => {
                                 <p>{props.details.esrb_rating?.name ? `ESRB: ${props.details.esrb_rating.name}` : ''}</p>
                             </div>
                             <div>
-                                <p className='font-bold text-xl'>Platforms: </p>
+                                <h6 className='font-bold text-xl'>Platforms </h6>
                                 <ul>
                                     {props.details.platforms?.map((el: any, i: number) => (
                                         <li key={`platform-li-${i}`}>{el.platform.name}</li>
@@ -141,7 +165,7 @@ const DetailedView = (props: Props) => {
                         <div>
                             {achievements?.results?.length > 0 && (
                                 <div>
-                                    <p className='font-bold text-xl'>Achievements</p>
+                                    <h6 className='font-bold text-xl'>Achievements</h6>
                                     <div className='h-[600px] overflow-scroll'>
                                         <ul>
                                             {achievements.results.map((el: any, i: number) => (
