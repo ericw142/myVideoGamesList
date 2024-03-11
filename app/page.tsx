@@ -10,25 +10,25 @@ import PlanToPlay from './list-components/PlanToPlay';
 import Image from 'next/image';
 
 export default function Home() {
-    const [selectedList, setSelectedList] = useState('All Games')
+    const [selectedList, setSelectedList] = useState('Search')
 
     return (
         <div>
             <Image className='hidden sm:block absolute w-full h-full object-cover' fill={true} src="/george-kedenburg-iii-v4UVbVgsW-4-unsplash.jpg" alt="movie_background"/>
 
             <main className="fixed w-full px-4 py-24 z-50">
-                <div className='w-[600px] h-[800px] mx-auto bg-white/90 text-black z-[2]'>
-                    <div className="bg-blue-700 w-full h-[120px] p-4 flex items-center justify-center">
+                <div className='w-[600px] h-[800px] mx-auto bg-white text-black z-[2] rounded'>
+                    <div className="bg-blue-700 w-full h-[120px] p-4 flex items-center justify-center rounded">
                         <p className="text-white text-4xl">My List</p>
                     </div>
                     {/* Navbar */}
-                    <div className="flex justify-evenly items-center w-full relative bg-white">
+                    <div className="flex justify-evenly items-center w-full relative bg-white border-b-2 border-black">
                         <div>
                             <button
                                 className="h-[30px] border-solid border-r-2 border-black p-2"
-                                onClick={() => setSelectedList('All Games')}
+                                onClick={() => setSelectedList('Search')}
                             >
-                                    <p className='text-[14px]'>All Games</p>
+                                    <p className='text-[14px]'>Search</p>
                             </button>
                         </div>
                         <div>
