@@ -1,5 +1,6 @@
 import React from 'react'
 import { useCookies } from 'next-client-cookies';
+import List from './List';
 
 const CurrentlyPlaying = () => {
     const cookies = useCookies()
@@ -8,13 +9,7 @@ const CurrentlyPlaying = () => {
     return (
         <div>
             {currentlyPlayingList ? (
-                <div>
-                    {JSON.parse(currentlyPlayingList).map((el: { id: string, name: string, background_image: string }, i: number) => {
-                        return (
-                            <div key={`${i}-list-item-${el.id}`}>{el.name}</div>
-                        )
-                    })}
-                </div>
+                <List list={currentlyPlayingList}/>
             ) : (
                 <div>
                     <hr />

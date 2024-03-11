@@ -1,5 +1,6 @@
 import React from 'react'
 import { useCookies } from 'next-client-cookies';
+import List from './List';
 
 const OnHold = () => {
     const cookies = useCookies()
@@ -8,13 +9,7 @@ const OnHold = () => {
     return (
         <div>
             {onHoldList ? (
-                <div>
-                    {JSON.parse(onHoldList).map((el: { id: string, name: string, background_image: string }, i: number) => {
-                        return (
-                            <div key={`${i}-list-item-${el.id}`}>{el.name}</div>
-                        )
-                    })}
-                </div>
+                <List list={onHoldList}/>
             ) : (
                 <div>
                     <hr />

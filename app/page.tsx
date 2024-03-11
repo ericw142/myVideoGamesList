@@ -19,7 +19,7 @@ export default function Home() {
             <main className="fixed w-full px-4 py-24 z-50">
                 <div className='w-[600px] h-[800px] mx-auto bg-white text-black z-[2] rounded'>
                     <div className="bg-blue-700 w-full h-[120px] p-4 flex items-center justify-center rounded">
-                        <p className="text-white text-4xl">My List</p>
+                        <p className="text-white text-4xl">{selectedList}</p>
                     </div>
                     {/* Navbar */}
                     <div className="flex justify-evenly items-center w-full relative bg-white border-b-2 border-black">
