@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AllGames = () => {
+const Search = () => {
     return (
         <div>
             <p>Search Bar</p>
@@ -9,4 +9,4 @@ const AllGames = () => {
     )
 }
 
-export default AllGames
+export default Search

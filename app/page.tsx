@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import React, { useState } from 'react'
-import AllGames from './list-components/AllGames';
+import Search from './list-components/Search';
 import CurrentlyPlaying from './list-components/CurrentlyPlaying';
 import Completed from './list-components/Completed';
 import OnHold from './list-components/OnHold';
@@ -74,7 +74,7 @@ export default function Home() {
                     </div>
                     {/* List */}
                     {selectedList === 'All Games' ? (
-                        <AllGames />
+                        <Search />
                     ) : selectedList === 'Currently Playing' ? (
                         <CurrentlyPlaying />
                     ) : selectedList === 'Completed' ? (

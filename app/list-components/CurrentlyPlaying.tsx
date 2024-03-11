@@ -5,9 +5,6 @@ const CurrentlyPlaying = () => {
     const cookies = useCookies()
     const currentlyPlayingList = cookies.get('currentlyPlaying')
 
-    // cookie formatting
-    // [ { id: '', name: '', background_image: '' } ]
-
     return (
         <div>
             {currentlyPlayingList ? (
