@@ -81,6 +81,7 @@ const DetailedView = (props: Props) => {
     const cookies = useCookies()
     const [achievements, setAchievements] = useState<any>()
     const [selectedList, setSelectedList] = useState<string>('currentlyPlaying')
+    const [messageDisplay, setMessageDisplay] = useState<string>('')
 
     useEffect(() => {
         if (props.slug) {
@@ -94,6 +95,12 @@ const DetailedView = (props: Props) => {
     
         }
     }, [props.slug])
+
+    useEffect(() => {
+        if (messageDisplay) {
+            setInterval(() => setMessageDisplay(''), 4000)
+        }
+    }, [messageDisplay])
 
     const formatReleaseDate = (released: string | undefined) => {
         if (!released) return '';
@@ -139,11 +146,13 @@ const DetailedView = (props: Props) => {
                                     onClick={() => {
                                         const updatedList = addGameToList(cookies.get(selectedList), { id: props.details.id, name: props.details.name, background_image: props.details.background_image })
                                         cookies.set(selectedList, updatedList)
+                                        setMessageDisplay('Added to list')
                                     }}
                                     className='mt-3 border-solid border-2 border-black px-6 rounded cursor-pointer hover:bg-black hover:text-white'
                                 >
                                     Add to List
                                 </button>
+                                <p className='text-[#5fd12e] text-lg font-semibold'>{messageDisplay}</p>
                             </div>
                             <div className='pt-2 pb-6'>
                                 <p>{formatReleaseDate(props.details.released)}</p>
