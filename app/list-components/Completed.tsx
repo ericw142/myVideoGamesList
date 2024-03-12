@@ -1,15 +1,27 @@
 import React from 'react'
 import { useCookies } from 'next-client-cookies';
 import List from './List';
+import removeGameFromList from '../utils/removeGameFromList';
+import updateGameInList from '../utils/updateGameInList';
 
 const Completed = () => {
     const cookies = useCookies()
     const completedList = cookies.get('completed')
 
+    const updateRating = (gameIndex: number, updatedGame: any) => {
+        const updated = updateGameInList(completedList, gameIndex, updatedGame);
+        cookies.set('completed', updated);
+    }
+
+    const deleteHandler = (gameIndex: number) => {
+        const updated = removeGameFromList(completedList, gameIndex);
+        cookies.set('completed', updated);
+    }
+
     return (
         <div>
             {completedList ? (
-                <List list={completedList}/>
+                <List list={completedList} updateRatingHandler={updateRating} deleteHandler={deleteHandler}/>
             ) : (
                 <div>
                     <hr />

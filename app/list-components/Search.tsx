@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import blockedTags from '../utils/blockedTags'
+import React, { useState } from 'react'
 import SearchResults from './SearchResults'
 
 const Search = () => {
@@ -13,12 +12,8 @@ const Search = () => {
         fetch(`/api/games/search?search=${searchTerm}`)
         .then((res) => res.json())
           .then((data) => {
-            console.log(data)
             if (data?.results !== undefined) {
-                const filtered =  data.results.filter((result: any) =>
-                    !result.tags.some((tag: any) => blockedTags.includes(tag.slug))
-                );
-                setGames(filtered)
+                setGames(data.results)
             }
             setLoading(false)
           })
