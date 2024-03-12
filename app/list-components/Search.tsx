@@ -1,10 +1,45 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import blockedTags from '../utils/blockedTags'
+import SearchResults from './SearchResults'
 
 const Search = () => {
+    const [searchTerm, setSearchTerm] = useState<string>('')
+    const [isLoading, setLoading] = useState(true)
+    const [games, setGames] = useState<[]>([])
+
+    const searchGames = () => {
+        if (!searchTerm) return;
+
+        fetch(`/api/games/search?search=${searchTerm}`)
+        .then((res) => res.json())
+          .then((data) => {
+            console.log(data)
+            if (data?.results !== undefined) {
+                const filtered =  data.results.filter((result: any) =>
+                    !result.tags.some((tag: any) => blockedTags.includes(tag.slug))
+                );
+                setGames(filtered)
+            }
+            setLoading(false)
+          })
+    }
     return (
         <div>
-            <p>Search Bar</p>
-            <p>List of all games</p>
+            <div className='w-full h-[60px] border-2 p-2 flex justify-between'>
+                <input 
+                    type="text" 
+                    placeholder='Search all games'
+                    className='w-[80%] h-[40px] border-2 rounded' 
+                    onChange={(e) => setSearchTerm(e.currentTarget.value)}
+                ></input>
+                <button
+                    onClick={() => searchGames()}
+                    className="w-[15%] h-[40px] border-solid border-2 border-[rgb(127,187,103)] text-[rgb(127,187,103)] px-2 rounded cursor-pointer hover:bg-[rgb(127,187,103)] hover:text-white"
+                >
+                    Search
+                </button>
+            </div>
+            <SearchResults list={games} />
         </div>
     )
 }

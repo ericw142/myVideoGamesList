@@ -73,7 +73,7 @@ export default function Home() {
                         </div>
                     </div>
                     {/* List */}
-                    {selectedList === 'All Games' ? (
+                    {selectedList === 'Search' ? (
                         <Search />
                     ) : selectedList === 'Currently Playing' ? (
                         <CurrentlyPlaying />

@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { Dispatch, SetStateAction } from 'react'
+import getMetascoreBG from '@/app/utils/getMetascoreBG';
+import getMetascoreTagline from '@/app/utils/getMetascoreTagline';
 
 export interface Props {
     item: any;
@@ -8,20 +10,6 @@ export interface Props {
 
 const TopGamesTile = (props: Props) => {
     if (!props.item?.background_image) return <></>;
-
-    const getMetascoreBG = (score: number) => {
-        if (score >= 60) return 'bg-[rgb(93,203,130)]';
-        if (score >= 40) return 'bg-[rgb(245,192,89)]';
-        return 'bg-[rgb(237,114,119)]';
-    }
-
-    const getMetascoreTagline = (score: number) => {
-        if (score >= 80) return 'Universal Acclaim';
-        if (score >= 60) return 'Generally favorable';
-        if (score >= 40) return 'Mixed or Average';
-        if (score >= 20) return 'Generally unfavorable';
-        return 'Overwhelming Disapproval'
-    }
 
     return (
         <div className='bg-white rounded' onClick={() => props.setSelectedGameSlug(props.item?.slug)}>
