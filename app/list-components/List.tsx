@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react'
 import HamburgerButton from './HamburgerButton';
+import Star from './Star';
 
 export interface Props {
     list: string;
@@ -65,7 +66,7 @@ const List = (props: Props) => {
                             ) : (
                                 <div>
                                     <p>Rating:</p>
-                                    <p>{el.rating !== undefined ? Array(parseInt(el.rating)).fill("*") : ''}</p>
+                                    <div className='flex flex-row'>{el.rating !== undefined ? Array(parseInt(el.rating)).fill(<Star />) : ''}</div>
                                 </div>
                             )}
                         </div>
