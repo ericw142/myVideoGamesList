@@ -4,6 +4,8 @@ import HamburgerButton from './HamburgerButton';
 
 export interface Props {
     list: string;
+    updateRatingHandler: Function;
+    deleteHandler: Function;
 }
 
 const List = (props: Props) => {
@@ -32,7 +34,12 @@ const List = (props: Props) => {
                             <p className="font-semibold whitespace-nowrap">{el.name}</p>
                             {viewOptions.includes(i) ? (
                                 <div>
-                                    <select className='bg-white rounded w-full h-full p-1 border-2 border-black mb-2'>
+                                    <select
+                                        onChange={(e) => {
+                                            props.updateRatingHandler(i, { ...el, rating: e.currentTarget.value })
+                                        }}
+                                        className='bg-white rounded w-full h-full p-1 border-2 border-black mb-2'
+                                    >
                                         <option value="0">0</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -41,6 +48,9 @@ const List = (props: Props) => {
                                         <option value="5">5</option>
                                     </select>
                                     <button
+                                        onClick={() => {
+                                            props.deleteHandler(i)
+                                        }}
                                         className='border-solid border-2 border-[rgb(255,0,0)] text-[rgb(255,0,0)] px-2 rounded cursor-pointer hover:bg-[rgb(255,0,0)] hover:text-white'
                                     >
                                         Delete
