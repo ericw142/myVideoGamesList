@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import HamburgerButton from './HamburgerButton';
 
 export interface Props {
@@ -10,6 +10,10 @@ export interface Props {
 
 const List = (props: Props) => {
     const [viewOptions, setViewOptions] = useState<Array<number>>([])
+
+    useEffect(() => {
+        setViewOptions([])
+    }, [props.list])
 
     const showOptions = (key: number) => {
         const temp = [...viewOptions];
@@ -35,7 +39,9 @@ const List = (props: Props) => {
                             {viewOptions.includes(i) ? (
                                 <div>
                                     <select
+                                        defaultValue={el.rating}
                                         onChange={(e) => {
+                                            showOptions(i)
                                             props.updateRatingHandler(i, { ...el, rating: e.currentTarget.value })
                                         }}
                                         className='bg-white rounded w-full h-full p-1 border-2 border-black mb-2'
@@ -65,7 +71,7 @@ const List = (props: Props) => {
                         </div>
                         <div className='col-span-1'>
                             <div className='mt-[23px]'>
-                                <HamburgerButton clickHandler={() => showOptions(i)}/>
+                                <HamburgerButton default={viewOptions.includes(i)} clickHandler={() => showOptions(i)}/>
                             </div>
                         </div>
                     </div>
