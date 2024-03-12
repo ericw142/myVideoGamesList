@@ -21,7 +21,9 @@ const HamburgerButton = (props: Props) => {
             }}
             className="grid place-content-center p-6"
         >
-            <div className={toggledClass}></div>
+            <div className='relative h-auto'>
+                <div className={toggledClass}></div>
+            </div>
         </div>
     )
 }

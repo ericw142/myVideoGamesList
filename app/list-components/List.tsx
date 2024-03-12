@@ -21,22 +21,35 @@ const List = (props: Props) => {
     }
 
     return (
-        <div>
-            {JSON.parse(props.list).map((el: { id: string | undefined, name: string | undefined, background_image: string | undefined }, i: number) => {
+        <div className='h-[650px] overflow-scroll'>
+            {JSON.parse(props.list).map((el: { id: string | undefined, name: string | undefined, background_image: string | undefined, rating: string }, i: number) => {
                 return (
                     <div key={`${i}-list-item-${el.id}`} className="grid grid-cols-6 gap-2 border-2 border-black m-2 rounded">
                         <div className='col-span-2'>
                             <img className='h-[100px] w-full' src={el.background_image} alt={el.name} width="auto" height="100px"/>
                         </div>
-                        <div className="flex items-center col-span-3">
-                            <p className="font-semibold">{el.name}</p>
-                            {viewOptions.includes(i) && (
-                                <div className='ml-auto'>
+                        <div className="col-span-3">
+                            <p className="font-semibold whitespace-nowrap">{el.name}</p>
+                            {viewOptions.includes(i) ? (
+                                <div>
+                                    <select className='bg-white rounded w-full h-full p-1 border-2 border-black mb-2'>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
                                     <button
                                         className='border-solid border-2 border-[rgb(255,0,0)] text-[rgb(255,0,0)] px-2 rounded cursor-pointer hover:bg-[rgb(255,0,0)] hover:text-white'
                                     >
                                         Delete
                                     </button>
+                                </div>
+                            ) : (
+                                <div>
+                                    <p>Rating:</p>
+                                    <p>{el.rating !== undefined ? Array(parseInt(el.rating)).fill("*") : ''}</p>
                                 </div>
                             )}
                         </div>

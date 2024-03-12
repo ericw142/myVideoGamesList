@@ -144,7 +144,7 @@ const DetailedView = (props: Props) => {
                                 </select>
                                 <button
                                     onClick={() => {
-                                        const updatedList = addGameToList(cookies.get(selectedList), { id: props.details.id, name: props.details.name, background_image: props.details.background_image })
+                                        const updatedList = addGameToList(cookies.get(selectedList), { id: props.details.id, name: props.details.name, background_image: props.details.background_image, rating: "0" })
                                         cookies.set(selectedList, updatedList)
                                         setMessageDisplay('Added to list')
                                     }}
