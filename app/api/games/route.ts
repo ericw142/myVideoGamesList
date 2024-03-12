@@ -10,7 +10,5 @@ export async function GET(request: Request) {
     const platform = searchParams.get('platform')
     const res = await fetch(`${gamesRequest}${genre && `&genres=${genre}`}${platform ? `&platforms=${platform}` : ''}${page !== undefined && `&page=${page}&page_size=20`}`)
 
-    const games = await res.json()
-   
-    return NextResponse.json({ games })
+    return NextResponse.json(await res.json())
 }

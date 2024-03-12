@@ -36,7 +36,7 @@ const List = (props: Props) => {
                             <img className='h-[100px] w-full' src={el.background_image} alt={el.name} width="auto" height="100px"/>
                         </div>
                         <div className="col-span-3">
-                            <p className="font-semibold whitespace-nowrap">{el.name}</p>
+                            <p className="font-semibold whitespace-nowrap">{viewOptions.includes(i) && 'Update rating for '}{el.name}</p>
                             {viewOptions.includes(i) ? (
                                 <div>
                                     <select
@@ -47,12 +47,12 @@ const List = (props: Props) => {
                                         }}
                                         className='bg-white rounded w-full h-full p-1 border-2 border-black mb-2'
                                     >
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
+                                        <option value="0">No stars</option>
+                                        <option value="1">1 out of 5</option>
+                                        <option value="2">2 out of 5</option>
+                                        <option value="3">3 out of 5</option>
+                                        <option value="4">4 out of 5</option>
+                                        <option value="5">5 out of 5</option>
                                     </select>
                                     <button
                                         onClick={() => {

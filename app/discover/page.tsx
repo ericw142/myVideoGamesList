@@ -45,12 +45,12 @@ export default function Discover() {
         fetch(`/api/games?genre=${selectedGenre}${selectedPlatform && `&platform=${selectedPlatform}`}&page=${page}`)
           .then((res) => res.json())
           .then((data) => {
-            if (data?.games?.results !== undefined) {
-                const filtered =  data.games.results.filter((result: any) =>
+            if (data?.results !== undefined) {
+                const filtered =  data.results.filter((result: any) =>
                     !result.tags.some((tag: any) => blockedTags.includes(tag.slug))
                 );
                 setGames(filtered)
-                const total = Math.ceil(data.games.count / 20);
+                const total = Math.ceil(data.count / 20);
                 if (total > 100) {
                     setTotalPages(100)
                 } else {
@@ -83,7 +83,7 @@ export default function Discover() {
                 ) : gameDetails ? (
                     <DetailedView details={gameDetails} setGameDetails={setGameDetails} slug={selectedGameSlug} setSlug={setSelectedGameSlug}/>
                 ) : (
-                    <div className='text-center w-full h-[850px] mx-auto bg-white/90 z-50 overflow-scroll overscroll-contain rounded'>
+                    <div className='text-center w-full h-[850px] mx-auto bg-white z-50 overflow-scroll overscroll-contain rounded'>
                         <div className='p-2 px-20'>
                             <h2 className='text-start text-md font-bold'>Filters</h2>
                             <FilterRow filterName={'Genre'} setFilter={setSelectedGenre} options={genres}/>

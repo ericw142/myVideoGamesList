@@ -18,12 +18,11 @@ export default function TopGames() {
         fetch(`/api/games/topgames?page=${page}`)
           .then((res) => res.json())
           .then((data) => {
-            if (data?.games?.results !== undefined) {
-                const filtered =  data.games.results.filter((result: any) =>
+            if (data?.results !== undefined) {
+                const filtered =  data.results.filter((result: any) =>
                     !result.tags.some((tag: any) => blockedTags.includes(tag.slug))
                 );
                 setGames(filtered)
-                console.log(filtered)
             }
             setLoading(false)
           })
@@ -51,7 +50,7 @@ export default function TopGames() {
                 ) : gameDetails ? (
                     <DetailedView details={gameDetails} setGameDetails={setGameDetails} slug={selectedGameSlug} setSlug={setSelectedGameSlug}/>
                 ) : (
-                    <div className='text-center w-full h-[850px] mx-auto bg-white/90 z-50 overflow-scroll overscroll-contain rounded'>
+                    <div className='text-center w-full h-[850px] mx-auto bg-white z-50 overflow-scroll overscroll-contain rounded'>
                         <TopGamesDisplay title={'Top Games by Metacritic Rating'} games={games ?? []} setSelectedGameSlug={setSelectedGameSlug}/>
                         <Pagination page={page} totalPages={1000} setPage={setPage} />
                     </div>  
