@@ -12,6 +12,7 @@ import ListTypeButton from './list-components/ListTypeButton';
 
 export default function Home() {
     const [selectedList, setSelectedList] = useState('Search')
+    const lists = ['Search', 'Currently Playing', 'Completed', 'On Hold', 'Dropped', 'Plan to Play'];
 
     return (
         <div>
@@ -19,17 +20,14 @@ export default function Home() {
 
             <main className="fixed w-full px-4 py-24 z-50">
                 <div className='w-[600px] h-[800px] mx-auto bg-white text-black z-[2] rounded'>
-                    <div className="bg-blue-700 w-full h-[120px] p-4 flex items-center justify-center rounded">
-                        <p className="text-white text-4xl">{selectedList}</p>
+                    <div className="bg-blue-700 w-full h-[120px] p-4 flex items-center justify-center rounded-tl rounded-tr">
+                        <p className="text-white text-4xl font-semibold">{selectedList}</p>
                     </div>
                     {/* Navbar */}
                     <div className="flex justify-evenly items-center w-full relative bg-white border-b-2 border-black">
-                        <ListTypeButton listName="Search" setSelectedList={setSelectedList}/>
-                        <ListTypeButton listName="Currently Playing" setSelectedList={setSelectedList}/>
-                        <ListTypeButton listName="Completed" setSelectedList={setSelectedList}/>
-                        <ListTypeButton listName="On Hold" setSelectedList={setSelectedList}/>
-                        <ListTypeButton listName="Dropped" setSelectedList={setSelectedList}/>
-                        <ListTypeButton listName="Plan to Play" setSelectedList={setSelectedList}/>
+                        {lists.map((list, i) => {
+                            return <ListTypeButton key={`list-${list}-${i}`} listName={list} setSelectedList={setSelectedList}/>
+                        })}
                     </div>
                     {/* List */}
                     {selectedList === 'Search' ? (

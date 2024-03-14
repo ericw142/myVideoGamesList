@@ -7,12 +7,11 @@ export interface Props {
 
 const ListTypeButton = (props: Props) => {
     return (
-        <div>
+        <div className='hover:bg-blue-300 p-2 transition-all' onClick={() => props.setSelectedList(props.listName)}>
             <button
-                className="h-[30px] border-solid border-r-2 border-black p-2"
-                onClick={() => props.setSelectedList(props.listName)}
+                className="h-[30px] text-md hover:text-lg"
             >
-                    <p className='text-[14px]'>{props.listName}</p>
+                    <p>{props.listName}</p>
             </button>
         </div>
     )

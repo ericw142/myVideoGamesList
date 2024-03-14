@@ -29,7 +29,7 @@ const SearchResults = (props: Props) => {
         <div className='h-[580px] overflow-scroll'>
             {props.list.map((el: any, i: number) => {
                 return (
-                    <SearchResultItem index={i} el={el} showOptions={showOptions} viewOptions={viewOptions}/>
+                    <SearchResultItem key={`search-results-item-${i}`} index={i} el={el} showOptions={showOptions} viewOptions={viewOptions}/>
                 )
             })}
         </div>
