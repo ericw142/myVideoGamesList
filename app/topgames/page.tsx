@@ -1,7 +1,6 @@
 "use client"
 import { useState, useEffect } from 'react'
 import TopGamesDisplay from './components/TopGamesDisplay'
-import Image from 'next/image'
 import DetailedView from '../discover/components/DetailedView'
 import Pagination from '../discover/components/Pagination'
 import blockedTags from '../utils/blockedTags'

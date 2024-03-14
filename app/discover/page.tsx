@@ -1,6 +1,5 @@
 "use client"
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import DetailedView from './components/DetailedView'
 import Pagination from './components/Pagination'
 import blockedTags from '../utils/blockedTags'
