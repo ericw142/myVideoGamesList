@@ -5,6 +5,7 @@ import Image from 'next/image'
 import DetailedView from '../discover/components/DetailedView'
 import Pagination from '../discover/components/Pagination'
 import blockedTags from '../utils/blockedTags'
+import LoadingAnimation from '../discover/components/LoadingAnimation'
 
 export default function TopGames() {
     const [games, setGames] = useState<[]>([])
@@ -45,14 +46,22 @@ export default function TopGames() {
         <div className=''>
            <Image className='hidden sm:block absolute w-full h-full object-cover' fill={true} src="/george-kedenburg-iii-v4UVbVgsW-4-unsplash.jpg" alt="movie_background"/>
             <main className="flex min-h-screen flex-col items-center justify-between px-24 pt-24">
-                {isLoading ? (
-                    <></>
-                ) : gameDetails ? (
+                {gameDetails ? (
                     <DetailedView details={gameDetails} setGameDetails={setGameDetails} slug={selectedGameSlug} setSlug={setSelectedGameSlug}/>
                 ) : (
                     <div className='text-center w-full h-[850px] mx-auto bg-white z-50 overflow-scroll overscroll-contain rounded'>
-                        <TopGamesDisplay title={'Top Games by Metacritic Rating'} games={games ?? []} setSelectedGameSlug={setSelectedGameSlug}/>
-                        <Pagination page={page} totalPages={1000} setPage={setPage} />
+                        <h2 className='text-black font-bold md:text-xl p-4'>Top Games by Metacritic Rating</h2>
+                        {isLoading ? (
+                            <div className='flex flex-row min-h-screen justify-center items-center'>
+                                <LoadingAnimation />
+                            </div>
+                        ) : (
+                            <>
+                                <TopGamesDisplay games={games ?? []} setSelectedGameSlug={setSelectedGameSlug}/>
+                                <Pagination page={page} totalPages={1000} setPage={setPage} />
+                            </>
+                        )}
+                        
                     </div>  
                 )}
             </main>

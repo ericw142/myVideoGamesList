@@ -4,6 +4,7 @@ export interface Props {
     filterName: string;
     setFilter: Dispatch<SetStateAction<string>>;
     options: Array<any>;
+    disabled?: boolean;
 }
 
 const FilterRow = (props: Props) => {
@@ -14,7 +15,8 @@ const FilterRow = (props: Props) => {
             </div>
             <div className='col-span-2'>
                 <select
-                    className='bg-white rounded w-full h-full p-2 border-1 border-black'
+                    className='bg-white w-full h-full border-2 rounded focus:border-blue-500 p-2'
+                    disabled={props.disabled === undefined ? false: props.disabled}
                     onChange={(e) => {
                         props.setFilter(e.currentTarget.value)
                     }}
