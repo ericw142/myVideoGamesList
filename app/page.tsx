@@ -8,6 +8,7 @@ import OnHold from './list-components/OnHold';
 import Dropped from './list-components/Dropped';
 import PlanToPlay from './list-components/PlanToPlay';
 import Image from 'next/image';
+import ListTypeButton from './list-components/ListTypeButton';
 
 export default function Home() {
     const [selectedList, setSelectedList] = useState('Search')
@@ -23,54 +24,12 @@ export default function Home() {
                     </div>
                     {/* Navbar */}
                     <div className="flex justify-evenly items-center w-full relative bg-white border-b-2 border-black">
-                        <div>
-                            <button
-                                className="h-[30px] border-solid border-r-2 border-black p-2"
-                                onClick={() => setSelectedList('Search')}
-                            >
-                                    <p className='text-[14px]'>Search</p>
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                className="h-[30px] border-solid border-r-2 border-black p-2"
-                                onClick={() => setSelectedList('Currently Playing')}
-                            >
-                                <p className='text-[14px]'>Currently Playing</p>
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                className="h-[30px] border-solid border-r-2 border-black p-2"
-                                onClick={() => setSelectedList('Completed')}
-                            >
-                                <p className='text-[14px]'>Completed</p>
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                className="h-[30px] border-solid border-r-2 border-black p-2"
-                                onClick={() => setSelectedList('On Hold')}
-                            >
-                                <p className='text-[14px]'>On Hold</p>
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                className="h-[30px] border-solid border-r-2 border-black p-2"
-                                onClick={() => setSelectedList('Dropped')}
-                            >
-                                <p className='text-[14px]'>Dropped</p>
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                className="h-[30px] p-2"
-                                onClick={() => setSelectedList('Plan to Play')}
-                            >
-                                <p className='text-[14px]'>Plan to Play</p>
-                            </button>
-                        </div>
+                        <ListTypeButton listName="Search" setSelectedList={setSelectedList}/>
+                        <ListTypeButton listName="Currently Playing" setSelectedList={setSelectedList}/>
+                        <ListTypeButton listName="Completed" setSelectedList={setSelectedList}/>
+                        <ListTypeButton listName="On Hold" setSelectedList={setSelectedList}/>
+                        <ListTypeButton listName="Dropped" setSelectedList={setSelectedList}/>
+                        <ListTypeButton listName="Plan to Play" setSelectedList={setSelectedList}/>
                     </div>
                     {/* List */}
                     {selectedList === 'Search' ? (
