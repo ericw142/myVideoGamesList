@@ -77,17 +77,22 @@ export default function Discover() {
     }, [selectedGameSlug])
 
     return (
-        <div>
-            <Image className='hidden sm:block absolute w-full h-full object-cover' fill={true} src="/george-kedenburg-iii-v4UVbVgsW-4-unsplash.jpg" alt="movie_background"/>
-            <main className="flex min-h-screen flex-col items-center justify-between px-24 pt-24">
+        <main>
                 {gameDetails ? (
                     <DetailedView details={gameDetails} setGameDetails={setGameDetails} slug={selectedGameSlug} setSlug={setSelectedGameSlug}/>
                 ) : (
-                    <div className='text-center w-full h-[850px] mx-auto bg-white z-50 overflow-scroll overscroll-contain rounded'>
-                        <div className='p-2 px-20'>
-                            <h2 className='text-start text-md font-bold'>Filters</h2>
-                            <FilterRow filterName={'Genre'} setFilter={setSelectedGenre} options={genres} disabled={isLoading}/>
-                            <FilterRow filterName={'Platform'} setFilter={setSelectedPlatform} options={platforms} disabled={isLoading}/>
+                    <div className='container text-center mx-auto px-10 py-20'>
+                        <div className='grid sm:grid-cols-1 md:grid-cols-2'>
+                            <div className='text-start flex items-center'>
+                                <h2 className='text-black font-bold md:text-[30px] p-4'>Discover games</h2>
+                            </div>
+                            <div>
+                                <div className=''>
+                                    <h2 className='text-start text-md font-bold'>Filters</h2>
+                                    <FilterRow filterName={'Genre'} setFilter={setSelectedGenre} options={genres} disabled={isLoading}/>
+                                    <FilterRow filterName={'Platform'} setFilter={setSelectedPlatform} options={platforms} disabled={isLoading}/>
+                                </div>
+                            </div>
                         </div>
                         {isLoading ? (
                             <div className='flex flex-row min-h-screen justify-center items-center'>
@@ -101,7 +106,6 @@ export default function Discover() {
                         )}
                     </div>
                 )}
-            </main>
-        </div>
+        </main>
     );
 }

@@ -11,7 +11,7 @@ import Image from 'next/image';
 import ListTypeButton from './list-components/ListTypeButton';
 
 export default function Home() {
-    const [selectedList, setSelectedList] = useState('Search')
+    const [selectedList, setSelectedList] = useState('Completed')
     const lists = ['Search', 'Currently Playing', 'Completed', 'On Hold', 'Dropped', 'Plan to Play'];
 
     return (

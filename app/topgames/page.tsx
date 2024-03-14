@@ -44,14 +44,17 @@ export default function TopGames() {
     }, [selectedGameSlug])
 
     return (
-        <div className=''>
-           <Image className='hidden sm:block absolute w-full h-full object-cover' fill={true} src="/george-kedenburg-iii-v4UVbVgsW-4-unsplash.jpg" alt="movie_background"/>
-            <main className="flex min-h-screen flex-col items-center justify-between px-24 pt-24">
+        <main>
                 {gameDetails ? (
                     <DetailedView details={gameDetails} setGameDetails={setGameDetails} slug={selectedGameSlug} setSlug={setSelectedGameSlug}/>
                 ) : (
-                    <div className='text-center w-full h-[850px] mx-auto bg-white z-50 overflow-scroll overscroll-contain rounded'>
-                        <h2 className='text-black font-bold md:text-xl p-4'>Top Games by Metacritic Rating</h2>
+                    <div className='container text-center mx-auto px-10 py-20'>
+                        <div className='grid sm:grid-cols-1 md:grid-cols-2'>
+                            <div className='text-start flex items-center'>
+                                <h2 className='text-black font-bold md:text-[30px] p-4'>Top Games by Metacritic Rating</h2>
+                            </div>
+                            <div></div>
+                        </div>
                         {isLoading ? (
                             <div className='flex flex-row min-h-screen justify-center items-center'>
                                 <LoadingAnimation />
@@ -65,7 +68,6 @@ export default function TopGames() {
                         
                     </div>  
                 )}
-            </main>
-        </div>
+        </main>
     );
 }
