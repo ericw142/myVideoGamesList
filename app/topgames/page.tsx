@@ -16,6 +16,7 @@ export default function TopGames() {
 
     useEffect(() => {
         setGames([])
+        setLoading(true)
         fetch(`/api/games/topgames?page=${page}`)
           .then((res) => res.json())
           .then((data) => {

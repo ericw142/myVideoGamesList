@@ -23,7 +23,6 @@ export default function ComingSoon() {
                     !result.tags.some((tag: any) => blockedTags.includes(tag.slug))
                 );
                 setGames(filtered)
-                console.log(filtered)
             }
             setLoading(false)
           })
@@ -46,9 +45,7 @@ export default function ComingSoon() {
         <div className=''>
         <Image className='hidden sm:block absolute w-full h-full object-cover' fill={true} src="/george-kedenburg-iii-v4UVbVgsW-4-unsplash.jpg" alt="movie_background"/>
          <main className="flex min-h-screen flex-col items-center justify-between px-24 pt-24">
-             {isLoading ? (
-                 <></>
-             ) : gameDetails ? (
+             {gameDetails ? (
                  <DetailedView details={gameDetails} setGameDetails={setGameDetails} slug={selectedGameSlug} setSlug={setSelectedGameSlug}/>
              ) : (
                  <div className='text-center w-full h-[850px] mx-auto bg-white z-50 overflow-scroll overscroll-contain rounded'>

@@ -1,12 +1,12 @@
 "use client"
 import { useState, useEffect } from 'react'
-import GamesDisplay from './components/GamesDisplay'
 import Image from 'next/image'
 import DetailedView from './components/DetailedView'
 import Pagination from './components/Pagination'
 import blockedTags from '../utils/blockedTags'
 import FilterRow from './components/FilterRow'
 import LoadingAnimation from './components/LoadingAnimation'
+import TopGamesDisplay from '../topgames/components/TopGamesDisplay'
 
 export default function Discover() {
     const [games, setGames] = useState<[]>([])
@@ -43,6 +43,7 @@ export default function Discover() {
 
     useEffect(() => {
         setGames([])
+        setLoading(true)
         fetch(`/api/games?genre=${selectedGenre}${selectedPlatform && `&platform=${selectedPlatform}`}&page=${page}`)
           .then((res) => res.json())
           .then((data) => {
@@ -94,9 +95,7 @@ export default function Discover() {
                             </div>
                         ) : (
                             <>
-                                <div className='text-center'>
-                                    <GamesDisplay games={games ?? []} setSelectedGameSlug={setSelectedGameSlug}/>
-                                </div>
+                                <TopGamesDisplay games={games ?? []} setSelectedGameSlug={setSelectedGameSlug}/>
                                 <Pagination page={page} totalPages={100} setPage={setPage} />
                             </>
                         )}
