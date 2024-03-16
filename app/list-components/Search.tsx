@@ -29,11 +29,11 @@ const Search = () => {
 
     return (
         <div>
-            <div className='w-full h-[60px] border-2 p-2 flex justify-between'>
+            <div className='w-full h-[60px] border-b p-2 flex justify-between'>
                 <input 
                     type="text" 
                     placeholder='Search all games'
-                    className='w-[80%] h-[40px] border-2 rounded' 
+                    className='w-[80%] h-[40px] border-2 rounded focus:border-blue-500 p-2 focus:placeholder:text-blue-500' 
                     onChange={inputHandler}
                     onKeyDown={(e) => {
                         if (e.key == 'Enter') {

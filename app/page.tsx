@@ -8,9 +8,11 @@ import OnHold from './list-components/OnHold';
 import Dropped from './list-components/Dropped';
 import PlanToPlay from './list-components/PlanToPlay';
 import Image from 'next/image';
+import ListTypeButton from './list-components/ListTypeButton';
 
 export default function Home() {
-    const [selectedList, setSelectedList] = useState('Search')
+    const [selectedList, setSelectedList] = useState('Completed')
+    const lists = ['Search', 'Currently Playing', 'Completed', 'On Hold', 'Dropped', 'Plan to Play'];
 
     return (
         <div>
@@ -18,59 +20,14 @@ export default function Home() {
 
             <main className="fixed w-full px-4 py-24 z-50">
                 <div className='w-[600px] h-[800px] mx-auto bg-white text-black z-[2] rounded'>
-                    <div className="bg-blue-700 w-full h-[120px] p-4 flex items-center justify-center rounded">
-                        <p className="text-white text-4xl">{selectedList}</p>
+                    <div className="bg-blue-700 w-full h-[120px] p-4 flex items-center justify-center rounded-tl rounded-tr">
+                        <p className="text-white text-4xl font-semibold">{selectedList}</p>
                     </div>
                     {/* Navbar */}
                     <div className="flex justify-evenly items-center w-full relative bg-white border-b-2 border-black">
-                        <div>
-                            <button
-                                className="h-[30px] border-solid border-r-2 border-black p-2"
-                                onClick={() => setSelectedList('Search')}
-                            >
-                                    <p className='text-[14px]'>Search</p>
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                className="h-[30px] border-solid border-r-2 border-black p-2"
-                                onClick={() => setSelectedList('Currently Playing')}
-                            >
-                                <p className='text-[14px]'>Currently Playing</p>
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                className="h-[30px] border-solid border-r-2 border-black p-2"
-                                onClick={() => setSelectedList('Completed')}
-                            >
-                                <p className='text-[14px]'>Completed</p>
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                className="h-[30px] border-solid border-r-2 border-black p-2"
-                                onClick={() => setSelectedList('On Hold')}
-                            >
-                                <p className='text-[14px]'>On Hold</p>
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                className="h-[30px] border-solid border-r-2 border-black p-2"
-                                onClick={() => setSelectedList('Dropped')}
-                            >
-                                <p className='text-[14px]'>Dropped</p>
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                className="h-[30px] p-2"
-                                onClick={() => setSelectedList('Plan to Play')}
-                            >
-                                <p className='text-[14px]'>Plan to Play</p>
-                            </button>
-                        </div>
+                        {lists.map((list, i) => {
+                            return <ListTypeButton key={`list-${list}-${i}`} listName={list} setSelectedList={setSelectedList}/>
+                        })}
                     </div>
                     {/* List */}
                     {selectedList === 'Search' ? (
