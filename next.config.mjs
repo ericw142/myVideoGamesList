@@ -1,10 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    basePath: "/myVideoGamesList",
-    output: "export",
-    images: {
-        unoptimized: true,
-    },
-};
+const nextConfig = {};
 
 export default nextConfig;

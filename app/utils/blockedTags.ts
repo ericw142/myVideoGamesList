@@ -1,1 +1,3 @@
-export default ['nudity', 'sexual-content', 'hentai'];
+const blocked = ['nudity', 'sexual-content', 'hentai'];
+
+export default blocked
