@@ -23,13 +23,11 @@ export default function Home() {
                     <div className="bg-blue-700 w-full h-[120px] p-4 flex items-center justify-center rounded-tl rounded-tr">
                         <p className="text-white text-4xl font-semibold">{selectedList}</p>
                     </div>
-                    {/* Navbar */}
                     <div className="flex justify-evenly items-center w-full relative bg-white border-b-2 border-black">
                         {lists.map((list, i) => {
                             return <ListTypeButton key={`list-${list}-${i}`} listName={list} setSelectedList={setSelectedList}/>
                         })}
                     </div>
-                    {/* List */}
                     {selectedList === 'Search' ? (
                         <Search />
                     ) : selectedList === 'Currently Playing' ? (
