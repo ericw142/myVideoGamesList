@@ -16,7 +16,7 @@ export default function Home() {
 
     return (
         <div>
-            <Image className='hidden sm:block absolute w-full h-full object-cover' fill={true} src="/george-kedenburg-iii-v4UVbVgsW-4-unsplash.jpg" alt="movie_background"/>
+            <Image className='hidden sm:block absolute w-full h-full object-cover' fill={true} src="/myVideoGamesList/george-kedenburg-iii-v4UVbVgsW-4-unsplash.jpg" alt="movie_background"/>
 
             <main className="fixed w-full px-4 py-24 z-50">
                 <div className='w-[600px] h-[800px] mx-auto bg-white text-black z-[2] rounded'>

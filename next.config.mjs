@@ -1,8 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     basePath: "/myVideoGamesList",
-    output: "export",  // <=== enables static exports
-    reactStrictMode: true,
+    output: "export",
+    images: {
+        unoptimized: true,
+    },
 };
 
 export default nextConfig;
