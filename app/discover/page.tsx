@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import DetailedView from './components/DetailedView'
 import Pagination from './components/Pagination'
 import blockedTags from '../utils/blockedTags'
+import blockedNames from '../utils/blockedNames'
 import FilterRow from './components/FilterRow'
 import LoadingAnimation from './components/LoadingAnimation'
 import TopGamesDisplay from '../topgames/components/TopGamesDisplay'
@@ -47,9 +48,12 @@ export default function Discover() {
           .then((res) => res.json())
           .then((data) => {
             if (data?.results !== undefined) {
-                const filtered =  data.results.filter((result: any) =>
+                const filteredByTag =  data.results.filter((result: any) =>
                     !result.tags.some((tag: any) => blockedTags.includes(tag.slug))
                 );
+                const filtered = filteredByTag.filter((result: any) => (
+                    !blockedNames.some((name: string) => result.name.toLowerCase().includes(name))
+                ))
                 setGames(filtered)
                 const total = Math.ceil(data.count / 20);
                 if (total > 100) {

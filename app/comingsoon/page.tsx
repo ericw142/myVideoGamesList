@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import DetailedView from '../discover/components/DetailedView'
 import Pagination from '../discover/components/Pagination'
 import blockedTags from '../utils/blockedTags'
+import blockedNames from '../utils/blockedNames'
 import ComingSoonDisplay from './components/ComingSoonDisplay'
 import LoadingAnimation from '../discover/components/LoadingAnimation'
 
@@ -19,9 +20,12 @@ export default function ComingSoon() {
           .then((res) => res.json())
           .then((data) => {
             if (data?.results !== undefined) {
-                const filtered =  data.results.filter((result: any) =>
+                const filteredByTag =  data.results.filter((result: any) =>
                     !result.tags.some((tag: any) => blockedTags.includes(tag.slug))
                 );
+                const filtered = filteredByTag.filter((result: any) => (
+                    !blockedNames.some((name: string) => result.name.toLowerCase().includes(name))
+                ))
                 setGames(filtered)
             }
             setLoading(false)
