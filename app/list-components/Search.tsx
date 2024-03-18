@@ -28,7 +28,7 @@ const Search = () => {
     }
 
     return (
-        <div className='h-[70vh]'>
+        <div className='h-[65vh] overflow-scroll'>
             <div className='w-full h-[60px] border-b p-2 flex justify-between'>
                 <input 
                     type="text" 
