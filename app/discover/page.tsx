@@ -7,6 +7,7 @@ import blockedNames from '../utils/blockedNames'
 import FilterRow from './components/FilterRow'
 import LoadingAnimation from './components/LoadingAnimation'
 import TopGamesDisplay from '../topgames/components/TopGamesDisplay'
+import handleScrollToTop from '../utils/handleScrollToTop'
 
 export default function Discover() {
     const [games, setGames] = useState<[]>([])
@@ -78,6 +79,12 @@ export default function Discover() {
 
         }
     }, [selectedGameSlug])
+
+    useEffect(() => {
+        if (!isLoading) {
+            handleScrollToTop()
+        }
+    }, [isLoading])
 
     return (
         <main>

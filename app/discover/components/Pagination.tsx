@@ -28,8 +28,12 @@ const Pagination = (props: Props) => {
     }
 
     return (
-        <div className='p-4'>
-            <p className='font-bold'><button onClick={goToFirstPage}><span className='text-[21px]'>&#171;</span></button>  <button onClick={goToPreviousPage}><span className='text-[21px]'>&#8249;</span></button> {props.page} of {props.totalPages} <button onClick={goToNextPage}><span className='text-[21px]'>&#8250;</span></button>  <button onClick={goToLastPage}><span className='text-[21px]'>&#187;</span></button></p>
+        <div className='p-4 flex flex-row justify-center'>
+            <button className='pagination-button' onClick={goToFirstPage}><span>&#171;</span></button>
+            <button className='pagination-button' onClick={goToPreviousPage}><span>&#8249;</span></button>
+            <p className='font-bold mt-2 mx-4'>{props.page} of {props.totalPages}</p>
+            <button className='pagination-button' onClick={goToNextPage}><span>&#8250;</span></button>
+            <button className='pagination-button' onClick={goToLastPage}><span>&#187;</span></button>
         </div>
     )
 }

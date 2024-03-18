@@ -6,6 +6,7 @@ import Pagination from '../discover/components/Pagination'
 import blockedTags from '../utils/blockedTags'
 import blockedNames from '../utils/blockedNames'
 import LoadingAnimation from '../discover/components/LoadingAnimation'
+import handleScrollToTop from '../utils/handleScrollToTop'
 
 export default function TopGames() {
     const [games, setGames] = useState<[]>([])
@@ -45,6 +46,12 @@ export default function TopGames() {
 
         }
     }, [selectedGameSlug])
+
+    useEffect(() => {
+        if (!isLoading) {
+            handleScrollToTop()
+        }
+    }, [isLoading])
 
     return (
         <main>
