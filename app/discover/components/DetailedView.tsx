@@ -108,7 +108,7 @@ const DetailedView = (props: Props) => {
     }
 
     return (
-        <div className='w-full h-full mx-auto bg-white z-50 rounded'>
+        <div className='w-full h-full mx-auto bg-white z-50'>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-2'>
                 <div>
                     <img className='max-h-[424px] w-full' src={props.details.background_image} alt={props.details.name} width="auto" height="424px"/>

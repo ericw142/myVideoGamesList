@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, Dispatch, SetStateAction } from 'react'
 import SearchResults from './SearchResults'
 import LoadingAnimation from '../discover/components/LoadingAnimation'
 
-const Search = () => {
+export interface Props {
+    setSlug: Dispatch<SetStateAction<string>>;
+}
+
+const Search = (props: Props) => {
     const [searchTerm, setSearchTerm] = useState<string>('')
     const [isLoading, setLoading] = useState(false)
     const [games, setGames] = useState<[]>([])
@@ -28,7 +32,7 @@ const Search = () => {
     }
 
     return (
-        <div className='h-[65vh] overflow-scroll'>
+        <div className='list-container'>
             <div className='w-full h-[60px] border-b p-2 flex justify-between'>
                 <input 
                     type="text" 
@@ -53,7 +57,7 @@ const Search = () => {
                     <div className='mr-[45px]'><LoadingAnimation /></div>
                 </div>
             ) : (
-                <SearchResults list={games} />
+                <SearchResults list={games} setSlug={props.setSlug} />
             )}
         </div>
     )

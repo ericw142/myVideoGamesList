@@ -14,6 +14,12 @@ body {
 
 }
 
+.list-container {
+    height: 65vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 .pagination-button {
     font-size: 40px;
     background: #ddd;

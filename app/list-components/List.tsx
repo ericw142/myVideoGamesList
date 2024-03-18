@@ -28,7 +28,7 @@ const List = (props: Props) => {
     }
 
     return (
-        <div className='h-[65vh] overflow-scroll'>
+        <div className='list-container'>
             {JSON.parse(props.list).map((el: { id: string | undefined, name: string | undefined, background_image: string | undefined, rating: string }, i: number) => {
                 return (
                     <div key={`${i}-list-item-${el.id}`} className="grid grid-cols-6 gap-2 border-2 border-black m-2 rounded">

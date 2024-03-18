@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+/* eslint-disable @next/next/no-img-element */
+import React, { useState, Dispatch, SetStateAction } from 'react'
 import HamburgerButton from './HamburgerButton';
 import getMetascoreBG from '../utils/getMetascoreBG';
 import getMetascoreTagline from '../utils/getMetascoreTagline';
@@ -10,6 +11,7 @@ export interface Props {
     el: any;
     showOptions: Function;
     viewOptions: Array<number>;
+    setSlug: Dispatch<SetStateAction<string>>;
 }
 
 const SearchResultItem = (props: Props) => {
@@ -20,10 +22,10 @@ const SearchResultItem = (props: Props) => {
     return (
         <div key={`${props.index}-list-item-${props.el.id}`} className="grid grid-cols-6 gap-2 border-2 border-black m-2 rounded">
             <div className='col-span-2'>
-                <img className='h-[100px] w-full' src={props.el.background_image} alt={props.el.name} width="auto" height="100px"/>
+                <img onClick={() => props.setSlug(props.el.slug)} className='h-[100px] w-full' src={props.el.background_image} alt={props.el.name} width="auto" height="100px"/>
             </div>
             <div className="col-span-3">
-                <p className="font-semibold whitespace-nowrap">{props.viewOptions.includes(props.index) && 'Add '}{props.el.name}{props.viewOptions.includes(props.index) && ' to a list?'}</p>
+                <p className="font-semibold">{props.viewOptions.includes(props.index) && 'Add '}{props.el.name}{props.viewOptions.includes(props.index) && ' to a list?'}</p>
                 {props.viewOptions.includes(props.index) ? (
                     <div>
                         {messageDisplay ? (
@@ -54,7 +56,7 @@ const SearchResultItem = (props: Props) => {
                         )}
                     </div>
                 ) : (
-                    <div className='grid grid-cols-1 lg:grid-cols-3 gap-2'>
+                    <div className='grid grid-cols-3 gap-2'>
                         <div className='col-span-2'>
                             <p>Metacritic Score </p>
                             <p>{getMetascoreTagline(props.el.metacritic)}</p>
