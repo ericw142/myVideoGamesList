@@ -11,7 +11,7 @@ import Image from 'next/image';
 import ListTypeButton from './list-components/ListTypeButton';
 
 export default function Home() {
-    const [selectedList, setSelectedList] = useState('Completed')
+    const [selectedList, setSelectedList] = useState('Currently Playing')
     const lists = ['Search', 'Currently Playing', 'Completed', 'On Hold', 'Dropped', 'Plan to Play'];
 
     return (
@@ -26,6 +26,7 @@ export default function Home() {
 
                     <div className='block sm:hidden'>
                         <select
+                            value={selectedList}
                             className='bg-white w-full h-full border-2 rounded focus:border-blue-500 p-2'
                             onChange={(e) => {
                                 setSelectedList(e.currentTarget.value)
