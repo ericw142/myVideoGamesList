@@ -48,10 +48,13 @@ export default function TopGames() {
 
     return (
         <main>
+            <div>
                 {gameDetails ? (
-                    <DetailedView details={gameDetails} setGameDetails={setGameDetails} slug={selectedGameSlug} setSlug={setSelectedGameSlug}/>
+                    <div className='pb-20'>
+                        <DetailedView details={gameDetails} setGameDetails={setGameDetails} slug={selectedGameSlug} setSlug={setSelectedGameSlug}/>
+                    </div>
                 ) : (
-                    <div className='container text-center mx-auto px-10 py-20'>
+                    <div className='container text-center mx-auto px-10 pb-20'>
                         <div className='grid sm:grid-cols-1 md:grid-cols-2'>
                             <div className='text-start flex items-center'>
                                 <h2 className='text-black font-bold md:text-[30px] p-4'>Top Games by Metacritic Rating</h2>
@@ -63,14 +66,14 @@ export default function TopGames() {
                                 <LoadingAnimation />
                             </div>
                         ) : (
-                            <>
+                            <div>
                                 <TopGamesDisplay games={games ?? []} setSelectedGameSlug={setSelectedGameSlug}/>
                                 <Pagination page={page} totalPages={1000} setPage={setPage} />
-                            </>
-                        )}
-                        
+                            </div>
+                        )}                
                     </div>  
                 )}
+            </div>
         </main>
     );
 }

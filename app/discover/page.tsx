@@ -81,10 +81,13 @@ export default function Discover() {
 
     return (
         <main>
+            <div>
                 {gameDetails ? (
-                    <DetailedView details={gameDetails} setGameDetails={setGameDetails} slug={selectedGameSlug} setSlug={setSelectedGameSlug}/>
+                    <div className='pb-20'>
+                        <DetailedView details={gameDetails} setGameDetails={setGameDetails} slug={selectedGameSlug} setSlug={setSelectedGameSlug}/>
+                    </div>
                 ) : (
-                    <div className='container text-center mx-auto px-10 py-20'>
+                    <div className='container text-center mx-auto px-10 pb-20'>
                         <div className='grid sm:grid-cols-1 md:grid-cols-2'>
                             <div className='text-start flex items-center'>
                                 <h2 className='text-black font-bold md:text-[30px] p-4'>Discover games</h2>
@@ -109,6 +112,7 @@ export default function Discover() {
                         )}
                     </div>
                 )}
+            </div>
         </main>
     );
 }

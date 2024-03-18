@@ -108,14 +108,14 @@ const DetailedView = (props: Props) => {
     }
 
     return (
-        <div className='w-full h-[846px] mx-auto bg-white z-50 rounded'>
-            <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+        <div className='w-full h-full mx-auto bg-white z-50 rounded'>
+            <div className='grid grid-cols-1 lg:grid-cols-2 gap-2'>
                 <div>
                     <img className='max-h-[424px] w-full' src={props.details.background_image} alt={props.details.name} width="auto" height="424px"/>
                     <img className='max-h-[424px] w-full' src={props.details.background_image_additional} alt={props.details.name} width="auto" height="424px"/>
                 </div>
 
-                <div className='h-[846px] pt-4 pr-4 overflow-scroll'>
+                <div className='h-full pt-4 pr-4 overflow-scroll px-2'>
                     <div className='flex justify-between'>
                         <h5 className='font-bold text-3xl'>{props.details.name}</h5>
                         <button
