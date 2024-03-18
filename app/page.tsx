@@ -16,18 +16,34 @@ export default function Home() {
 
     return (
         <div>
-            <Image className='hidden sm:block absolute w-full h-full object-cover' fill={true} src="/george-kedenburg-iii-v4UVbVgsW-4-unsplash.jpg" alt="movie_background"/>
+            <Image className='block absolute w-full h-full object-cover' fill={true} src="/george-kedenburg-iii-v4UVbVgsW-4-unsplash.jpg" alt="movie_background"/>
 
-            <main className="fixed w-full px-4 py-24 z-50">
-                <div className='w-[600px] h-[800px] mx-auto bg-white text-black z-[2] rounded'>
+            <main className="fixed w-full px-4 py-12 z-50">
+                <div className='w-auto max-w-[600px] h-full mx-auto bg-white text-black z-[2] rounded'>
                     <div className="bg-blue-700 w-full h-[120px] p-4 flex items-center justify-center rounded-tl rounded-tr">
                         <p className="text-white text-4xl font-semibold">{selectedList}</p>
                     </div>
-                    <div className="flex justify-evenly items-center w-full relative bg-white border-b-2 border-black">
-                        {lists.map((list, i) => {
-                            return <ListTypeButton key={`list-${list}-${i}`} listName={list} setSelectedList={setSelectedList}/>
-                        })}
+
+                    <div className='block sm:hidden'>
+                        <select
+                            className='bg-white w-full h-full border-2 rounded focus:border-blue-500 p-2'
+                            onChange={(e) => {
+                                setSelectedList(e.currentTarget.value)
+                            }}
+                        >
+                            {lists.map((list: any, i: number) => (
+                                <option key={`${list}-option-${i}`} value={list}>{list}</option>
+                            ))}
+                        </select>
                     </div>
+                    <div className='hidden sm:block'>
+                        <div className="flex justify-evenly items-center w-auto relative bg-white border-b-2 border-black">
+                            {lists.map((list, i) => {
+                                return <ListTypeButton key={`list-${list}-${i}`} listName={list} setSelectedList={setSelectedList}/>
+                            })}
+                        </div>
+                    </div>
+                    
                     {selectedList === 'Search' ? (
                         <Search />
                     ) : selectedList === 'Currently Playing' ? (

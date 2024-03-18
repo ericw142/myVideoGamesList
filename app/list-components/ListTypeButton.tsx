@@ -9,7 +9,7 @@ const ListTypeButton = (props: Props) => {
     return (
         <div className='hover:bg-blue-300 p-2 transition-all' onClick={() => props.setSelectedList(props.listName)}>
             <button
-                className="h-[30px] text-md hover:text-lg"
+                className="h-[30px]"
             >
                     <p>{props.listName}</p>
             </button>
